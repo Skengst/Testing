@@ -1,0 +1,34 @@
+name: MultipleJobs
+on:
+  push:
+    branches: [ "main" ]
+  workflow_dispatch:
+
+jobs:
+  step1:
+    env: 
+      TESTING: "This exist for testing purposes"
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Run a one-line script
+        run: echo Hello, world!
+      - name: Run a multi-line script
+        run: |
+          echo Add other actions to build,
+          echo test, and deploy your project.
+
+  step2:
+    env:
+      STEP2TESTING: "Strictly for trying if this works"
+    needs: step1
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Collecting the Secret Secret
+        env: 
+          SECRET_SECRETS: ${{ secrets.SECRET_SECRETS }}
+          TESTING2: ${{ step1.TESTING }}
+      - name: print the secret key with other information
+        run: echo $SECRET_SECRETS, $TESTING2, This runs succesfully if "This exist" is printed.
+      
