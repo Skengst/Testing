@@ -17,14 +17,11 @@ jobs:
   step2:
     env:
       STEP2TESTING: "Strictly for trying if this works"
+      SECRET_SECRETS: ${{ secrets.SECRET_SECRETS }}
     needs: step1
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Collecting the Secret Secret
-        env: 
-          SECRET_SECRETS: ${{ secrets.SECRET_SECRETS }}
-        run: echo "Secret key collected"
       - name: Print the secret key with other information
         run: |
           echo "$SECRET_SECRETS, $STEP2TESTING This runs successfully if 'This exist' is printed."
