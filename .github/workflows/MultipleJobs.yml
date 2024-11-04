@@ -13,6 +13,7 @@ jobs:
       - uses: actions/checkout@v4
       - name: Run a one-line script
         run: echo Hello, world!
+
   step2:
     env:
       STEP2TESTING: "Strictly for trying if this works"
@@ -23,7 +24,6 @@ jobs:
       - name: Collecting the Secret Secret
         env: 
           SECRET_SECRETS: ${{ secrets.SECRET_SECRETS }}
-      - name: print the secret key with other information
-        run:  
-          echo $SECRET_SECRETS, $STEP2TESTING This runs succesfully if "This exist" is printed.
-      
+      - name: Print the secret key with other information
+        run: |
+          echo "$SECRET_SECRETS, $STEP2TESTING This runs successfully if 'This exist' is printed."
