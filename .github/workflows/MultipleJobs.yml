@@ -28,7 +28,6 @@ jobs:
       - name: Collecting the Secret Secret
         env: 
           SECRET_SECRETS: ${{ secrets.SECRET_SECRETS }}
-          TESTING2: ${{ step1.TESTING }}
       - name: print the secret key with other information
-        run: echo $SECRET_SECRETS, $TESTING2, This runs succesfully if "This exist" is printed.
+        run: echo $SECRET_SECRETS, This runs succesfully if "This exist" is printed.
       
