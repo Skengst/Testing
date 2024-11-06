@@ -15,7 +15,14 @@ on:
         required: true
         default: 'false'
         type: boolean
-        
+      lint_run:
+        description: "Execute lint?"
+        required: true
+        default: 'yes'
+        type: choice
+        options:
+         - yes
+         - no     
 
 permissions:
   contents: read
@@ -37,6 +44,7 @@ jobs:
         pip install flake8 pytest
         if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
     - name: Lint with flake8
+      if: ${{ github.events.inputs.lint_run == 'yes'}}
       run: |
         # stop the build if there are Python syntax errors or undefined names
         flake8 . --count --select=E9,F63,F7,F82 --show-source --statistics
